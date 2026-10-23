@@ -78,6 +78,6 @@ $('#saveName').onclick=()=>{player=$('#nameInput').value.trim()||'Новый в�
 try{player=localStorage.getItem('dux-name')||player}catch(e){}$('#playerName').textContent=player.toUpperCase();$('#statName').textContent=player.toUpperCase();$('#leaderName').textContent=player;setModulePage(0);
 let downX=null;$('#system').addEventListener('pointerdown',e=>{downX=e.clientX});$('#system').addEventListener('pointerup',e=>{if(downX===null)return;const dx=e.clientX-downX;if(Math.abs(dx)>100)setModulePage(page+(dx<0?1:-1));downX=null});
 let autoPage=setInterval(()=>{if(active==='system')setModulePage(page+1)},9000);
-window.addEventListener('resize',()=>{}); 
+function fitStage(){const scale=Math.min(window.innerWidth/1920,window.innerHeight/1080);document.getElementById('stage').style.transform='translate(-50%,-50%) scale('+scale+')'}fitStage();window.addEventListener('resize',fitStage); 
 </script>
 </body></html>
