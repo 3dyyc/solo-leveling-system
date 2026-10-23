@@ -15,8 +15,57 @@ button,input,select,textarea{font:inherit}button{color:inherit;cursor:pointer}bu
 @media(max-width:950px){.layout{grid-template-columns:205px minmax(0,1fr)}.rightcol{grid-column:1/-1;grid-template-columns:1fr 1fr}.rightcol .panel:last-child{grid-column:1/-1}}
 @media(max-width:640px){.app{padding:9px 9px 78px}.topbar{align-items:flex-start;flex-direction:column}.topstats{width:100%;gap:5px}.pill{padding:6px 9px;font-size:13px}.topactions{position:absolute;right:10px;top:9px}.topactions .iconbtn{min-width:36px;padding:6px}.brand{padding-right:125px}.layout{display:flex;flex-direction:column}.profilepanel{order:0}.navpanel{display:none}.center{order:1}.rightcol{display:flex;flex-direction:column;order:2}.hero{min-height:190px}.twocol{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.bottomnav{position:fixed;bottom:0;left:0;right:0;z-index:10;display:flex;justify-content:space-around;padding:8px 4px calc(8px + env(safe-area-inset-bottom));background:#020817f5;border-top:1px solid #1265b0;backdrop-filter:blur(12px)}.bottomnav button{background:none;border:0;color:#77a8d2;font-size:11px;display:grid;gap:3px;justify-items:center}.bottomnav button span{font-size:19px}.bottomnav button.active{color:var(--cyan);text-shadow:0 0 10px #008cff}.section h2{font-size:21px}.panel{padding:12px}.avatar{width:62px;height:68px}.toast{right:10px;top:10px}.rightcol .panel:last-child{grid-column:auto}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* DUX // cinematic HUD pass */
+:root{--panel:rgba(5,15,38,.82);--line:#1a8dff;--cyan:#53efff;--blue:#327cff;--shadow:0 0 24px #087dff33,inset 0 0 26px #087dff10}
+body{background-image:radial-gradient(ellipse at 50% -5%,#10428a 0,transparent 48%),radial-gradient(ellipse at 90% 55%,#071b49 0,transparent 42%),linear-gradient(135deg,#02040e,#06142e 55%,#020611)}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.14;background:repeating-linear-gradient(0deg,transparent 0 3px,#4deaff12 4px,transparent 5px);mix-blend-mode:screen}
+.app{position:relative}
+.app:before{content:"DUX SYSTEM  /  LIVE INTERFACE";position:fixed;right:14px;bottom:8px;z-index:3;font:10px Rajdhani,sans-serif;letter-spacing:3px;color:#54dfff66;pointer-events:none}
+.topbar{padding:12px 14px;border:1px solid #1c8eff44;background:linear-gradient(100deg,#07152be8,#06132ad9 60%,#0b2141c9);box-shadow:0 8px 34px #0007,inset 0 0 24px #168dff0a;position:relative;overflow:hidden}
+.topbar:after,.panel:after,.card:after{content:"";position:absolute;left:0;top:0;width:36%;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.65;animation:duxScan 6s linear infinite;pointer-events:none}
+@keyframes duxScan{0%{transform:translateX(-120%)}100%{transform:translateX(360%)}}
+.brand{letter-spacing:5px;text-shadow:0 0 7px #31dfff,0 0 24px #167bff88}
+.pill,.iconbtn{border-color:#227bc7;background:linear-gradient(135deg,#0a1c3aee,#041027e8);box-shadow:inset 0 0 12px #178dff10;transition:transform .22s,border-color .22s,box-shadow .22s}
+button:hover{border-color:#62efff!important;box-shadow:0 0 18px #168dff55,inset 0 0 14px #24d8ff13}
+button:active{transform:scale(.97)}
+.panel,.card,.section,.item,.statbox,.quest,.tile,.modal{backdrop-filter:blur(12px)}
+.panel,.card{position:relative;overflow:hidden;border-color:#1b6caa;background:linear-gradient(145deg,rgba(7,23,52,.93),rgba(3,11,29,.91));box-shadow:0 10px 30px #0003,inset 0 1px #5ceaff12}
+.panel{border-top-color:#38bfff66}
+h1,h2,h3,.section-title{letter-spacing:1.4px;text-shadow:0 0 16px #167bff22}
+.section{animation:duxEnter .42s cubic-bezier(.16,1,.3,1) both}
+@keyframes duxExit{to{opacity:0;transform:translateY(-7px) scale(.99);filter:brightness(1.7)}}
+@keyframes duxEnter{0%{opacity:0;transform:translateY(13px) scale(.99);filter:brightness(1.8)}70%{opacity:1;filter:brightness(1.12)}100%{opacity:1;transform:none;filter:none}}
+.item,.quest,.tile{transition:transform .25s,border-color .25s,background .25s,box-shadow .25s}
+.item:hover,.quest:hover,.tile:hover{transform:translateY(-2px);border-color:#36cfff;background-color:#0a2043;box-shadow:0 7px 22px #007dff18}
+.tag{border-color:#248dca;color:#7ceeff;text-shadow:0 0 9px #00bfff33}
+button.primary,.primary{background:linear-gradient(110deg,#0877db,#13b8e7);box-shadow:0 0 18px #00aaff25,inset 0 1px #b4f8ff55}
+.modalBack{backdrop-filter:blur(8px)}
+.modal{border:1px solid #3bdfff88;box-shadow:0 0 0 1px #127cff22,0 0 70px #007dff38;background:linear-gradient(145deg,#091a38f7,#030b1df7);animation:duxModal .32s cubic-bezier(.16,1,.3,1) both}
+@keyframes duxModal{from{opacity:0;transform:perspective(900px) translateY(18px) rotateX(5deg) scale(.96)}to{opacity:1;transform:none}}
+/* brief activation sequence */
+#duxIntro{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;background:radial-gradient(ellipse at center,#0a2e64 0,#030a1c 48%,#01030b 100%);transition:opacity .55s,visibility .55s;overflow:hidden}
+#duxIntro:before{content:"";position:absolute;inset:-50%;background:repeating-conic-gradient(from 0deg at 50% 50%,transparent 0deg 9deg,#39dfff08 9.2deg 9.5deg,transparent 9.7deg 18deg);animation:duxRotate 32s linear infinite}
+#duxIntro:after{content:"";position:absolute;left:0;right:0;top:-30%;height:22%;background:linear-gradient(transparent,#3deaff24,transparent);animation:duxSweep 2.4s ease-in-out infinite}
+@keyframes duxRotate{to{transform:rotate(360deg)}}@keyframes duxSweep{to{top:115%}}
+#duxIntro.gone{opacity:0;visibility:hidden;pointer-events:none}
+.introCore{position:relative;text-align:center;padding:38px 24px;max-width:540px;width:100%;animation:introPop .8s cubic-bezier(.16,1,.3,1) both}
+@keyframes introPop{from{opacity:0;transform:scale(.84);filter:blur(8px)}to{opacity:1;transform:scale(1);filter:blur(0)}}
+.introFrame{position:absolute;inset:0;border:1px solid #3bdfff66;clip-path:polygon(0 14px,14px 0,calc(100% - 14px) 0,100% 14px,100% calc(100% - 14px),calc(100% - 14px) 100%,14px 100%,0 calc(100% - 14px));box-shadow:inset 0 0 45px #168dff14,0 0 40px #007dff18}
+.introFrame:before,.introFrame:after{content:"";position:absolute;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+.introFrame:before{width:70px;height:2px;top:-1px;left:20px}.introFrame:after{width:2px;height:50px;bottom:18px;right:-1px}
+.introKicker{font-size:11px;letter-spacing:5px;color:#6beaff}
+.introLogo{font:clamp(48px,14vw,86px) 'Russo One',sans-serif;letter-spacing:8px;color:#effcff;text-shadow:0 0 8px #fff,0 0 26px #19cfff,0 0 65px #1477ff;line-height:1.25;margin:14px 0}
+.introStatus{font-size:clamp(12px,3.5vw,16px);letter-spacing:2px;color:#b9edff}
+.introBar{height:2px;background:#15365d;margin:25px auto 0;max-width:280px;overflow:hidden}
+.introBar span{display:block;height:100%;width:0;background:#56f2ff;box-shadow:0 0 14px #56f2ff;animation:introLoad 1.35s ease-out .25s forwards}
+@keyframes introLoad{to{width:100%}}
+.introFoot{margin-top:13px;color:#6b9cc6;font-size:11px;letter-spacing:3px}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
 </style></head>
-<body><div class="app">
+<body>
+<div id="duxIntro" aria-label="Инициализация системы DUX"><div class="introCore"><div class="introFrame"></div><div class="introKicker">ПРОТОКОЛ ИНИЦИАЛИЗАЦИИ</div><div class="introLogo">DUX</div><div class="introStatus">СВЯЗЬ С ВОИНОМ УСТАНОВЛЕНА</div><div class="introBar"><span></span></div><div class="introFoot">СИСТЕМА РАЗВИТИЯ · ONLINE</div></div></div><div class="app">
 <header class="topbar"><div class="brand">DUX<small>СИСТЕМА РАЗВИТИЯ ВОИНОВ</small></div><div class="topstats"><div class="pill">✦ <b id="topExp">0</b> EXP</div><div class="pill">◈ <b id="topCoins">0</b> COINS</div><div class="pill">◇ <b id="topPoints">0</b> очков</div></div><div class="topactions"><button class="iconbtn" id="quickAdd" title="Быстрое действие">＋</button> <button class="iconbtn" id="settingsBtn" title="Настройки">⚙</button></div></header>
 <div class="layout">
 <aside class="leftcol"><section class="panel profilepanel"><div class="profile"><div class="avatar">⚔</div><div><div class="eyebrow">PLAYER STATUS</div><h2 id="playerName">Иванович</h2><div class="sub" id="playerRank">Ранг E · Новичок</div></div></div><div style="margin-top:14px;display:flex;justify-content:space-between"><span class="muted">Lv. <b id="level">1</b></span><span class="muted"><b id="expLabel">0 / 100</b> EXP</span></div><div class="bar"><span id="expBar" style="width:0%"></span></div><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted)"><span>HP <b id="hpLabel">100/100</b></span><span>MP <b id="mpLabel">50/50</b></span></div><div class="bar hp"><span id="hpBar" style="width:100%"></span></div><div class="bar"><span id="mpBar" style="width:100%;background:linear-gradient(90deg,#3d64ff,#bc75ff)"></span></div></section>
@@ -58,7 +107,18 @@ $('achievementList').innerHTML=state.achievements.map(a=>'<div class="item"><div
 $('inventoryList').innerHTML=state.items.map((it,i)=>'<div class="item"><div><strong>▣ '+esc(it.name)+'</strong><p>'+esc(it.desc)+'</p></div><span class="tag">× '+it.qty+'</span></div>').join('')||'<div class="empty">Инвентарь пуст.</div>';
 const logs=state.log.map(l=>'<div class="item"><div><span class="eyebrow">[SYSTEM]</span> '+esc(l.msg)+'</div><span class="muted">'+esc(l.time)+'</span></div>').join('');$('journalList').innerHTML=logs||'<div class="empty">Журнал пока пуст.</div>';$('dashLog').innerHTML=state.log.slice(0,4).map(l=>'<div class="item"><div>'+esc(l.msg)+'</div><span class="muted">'+esc(l.time)+'</span></div>').join('')||'<div class="muted">Система ожидает первое событие.</div>';
 }
-function goto(view){document.querySelectorAll('.section').forEach(x=>x.classList.toggle('active',x.id==='view-'+view));document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('active',x.dataset.view===view));if(view==='stats')pendingStats={};render();window.scrollTo({top:0,behavior:'smooth'})}
+let changingView=false;
+function goto(view){
+ if(changingView){document.querySelectorAll('.section').forEach(x=>x.classList.toggle('active',x.id==='view-'+view));document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('active',x.dataset.view===view));if(view==='stats')pendingStats={};render();return}
+ changingView=true;
+ const active=document.querySelector('.section.active');
+ if(active){active.style.animation='duxExit .18s ease-in both';}
+ setTimeout(()=>{
+  document.querySelectorAll('.section').forEach(x=>{x.classList.toggle('active',x.id==='view-'+view);x.style.animation='';});
+  document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('active',x.dataset.view===view));
+  if(view==='stats')pendingStats={};render();window.scrollTo({top:0,behavior:'smooth'});changingView=false;
+ },150);
+}
 document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>goto(b.dataset.view)));document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>goto(b.dataset.goto)));
 $('dailyBtn').onclick=()=>goto('quests');$('statusBtn').onclick=()=>goto('stats');$('settingsBtn').onclick=()=>goto('admin');$('quickAdd').onclick=()=>openModal('Быстрая награда','<label>Опыт (EXP)</label><input type="number" id="mExp" min="0" value="10"><label>Монеты</label><input type="number" id="mCoins" min="0" value="5>',()=>{});
 function openModal(title,body,action){$('modalTitle').textContent=title;$('modalBody').innerHTML=body;$('modalBack').classList.add('show');modalAction=action}
@@ -78,4 +138,8 @@ $('adminImport').onclick=()=>$('importFile').click();$('importFile').onchange=as
 $('adminReset').onclick=()=>openModal('Сбросить прогресс?','<p>Все локальные данные заменятся начальным состоянием. Сначала экспортируй сохранение, если хочешь его оставить.</p>',()=>{state=defaults();log('Создан новый профиль.');save();closeModal();toast('СИСТЕМА ПЕРЕЗАПУЩЕНА','Начальный профиль готов.')});
 $('quickAdd').onclick=()=>openModal('Быстрая награда','<label>Опыт (EXP)</label><input type="number" id="mExp" min="0" value="10"><label>Монеты</label><input type="number" id="mCoins" min="0" value="5"><label>Причина</label><input id="mReason" value="Бонус за действие">',()=>{const ex=Math.max(0,+$('mExp').value||0),c=Math.max(0,+$('mCoins').value||0),r=$('mReason').value;addExp(ex);state.coins+=c;log('Быстрая награда: '+r);closeModal();save();toast('НАГРАДА','+'+ex+' EXP · +'+c+' монет')});
 render();
+const intro=document.getElementById('duxIntro');
+const introDelay=window.matchMedia('(prefers-reduced-motion: reduce)').matches?500:1750;
+window.setTimeout(()=>intro?.classList.add('gone'),introDelay);
+window.setTimeout(()=>intro?.remove(),introDelay+700);
 </script></body></html>
